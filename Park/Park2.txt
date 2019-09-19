@@ -1,0 +1,54 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsolePark
+{
+    public enum DayOfWeek
+    {
+       Monday = 1,
+       Tuesday = 2,
+       Wednesday =3,
+       Thursday =4,
+       Friday=5,
+       Saturday=6,
+       Sunday=7
+    }
+   
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            while (1 == 1)
+            {//rost den nedeli pol imja
+                  try
+                {
+                    Console.WriteLine("Enter day of week! 1-Mon,2-Tue,3-Wed,4-Thu,5-Fri,6-Sat,7-Sun");
+                    Int32.TryParse(Console.ReadLine(), out int intDayOfWeek);
+                    DayOfWeek dayOfWeek = (DayOfWeek)intDayOfWeek;
+                    Console.WriteLine("Enter your name!");
+                    String userName = Console.ReadLine();
+                    Console.WriteLine("Enter your gender! g - girl/b- boy");
+                    String userGender = Console.ReadLine();
+                    Console.WriteLine("Enter your height in centimeters!");
+                    Int32.TryParse(Console.ReadLine(), out int userHeight);
+                    Console.WriteLine($"You entered:{userGender}, {userName},{dayOfWeek}, {userHeight}");
+
+
+
+                    Console.WriteLine("Good bye!!");
+                    Console.ReadLine();
+                    break;
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Unable to parse");
+                    continue;
+                }
+            }
+        }
+    }
+}
