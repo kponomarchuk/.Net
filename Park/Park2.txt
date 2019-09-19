@@ -37,7 +37,13 @@ namespace ConsolePark
                     Int32.TryParse(Console.ReadLine(), out int userHeight);
                     Console.WriteLine($"You entered:{userGender}, {userName},{dayOfWeek}, {userHeight}");
 
-                    string tst= ConfigurationManager.AppSettings["MinimumHeighForBatman"];
+                    String minHforBatman= ConfigurationManager.AppSettings["MinimumHeighForBatman"];
+
+                    if (((int) dayOfWeek == 1 || (int) dayOfWeek == 3 || (int) dayOfWeek == 5)&& userGender=="g" && userHeight >= (int)minHforBatman)
+                    {
+                        Console.WriteLine("You are allowed to go to Batman!");
+                    }
+
 
                     Console.WriteLine("Good bye!!");
                     Console.ReadLine();
