@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace ConsolePark
 {
@@ -21,7 +22,7 @@ namespace ConsolePark
     {
         static void Main(string[] args)
         {
-            while (1 == 1)
+            while (true)
             {//rost den nedeli pol imja
                   try
                 {
@@ -36,7 +37,7 @@ namespace ConsolePark
                     Int32.TryParse(Console.ReadLine(), out int userHeight);
                     Console.WriteLine($"You entered:{userGender}, {userName},{dayOfWeek}, {userHeight}");
 
-
+                    string tst= ConfigurationManager.AppSettings["MinimumHeighForBatman"];
 
                     Console.WriteLine("Good bye!!");
                     Console.ReadLine();
