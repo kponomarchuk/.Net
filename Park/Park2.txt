@@ -20,6 +20,31 @@ namespace ConsolePark
    
     class Program
     {
+	public static class AttractionSettings;
+{
+    public static int MinBoyHeighForBatman ;
+	
+    public static int MinGirlHeighForSwan ;
+	
+	public static int MaxGirlHeighForSwan ;
+	
+	public static int MaxBoyHeighForSwan ;
+
+    private static void AttractionSettings() -- static constructor
+    {
+       // Int32.TryParse(ConfigurationManager.AppSettings["MinimumBoyHeighForBatman"],int MinimumBoyHeighForBatman);
+	   // Int32.TryParse(ConfigurationManager.AppSettings["MinGirlHeighForSwan"],int MinGirlHeighForSwan);
+	   // Int32.TryParse(ConfigurationManager.AppSettings["MaxGirlHeighForSwan"],int MaxGirlHeighForSwan);
+	   // Int32.TryParse(ConfigurationManager.AppSettings["MaxBoyHeighForSwan"],int MaxBoyHeighForSwan);
+			MinimumBoyHeighForBatman = 150;
+			MinGirlHeighForSwan =120;
+			MaxGirlHeighForSwan =140;
+			MaxBoyHeighForSwan=160;
+	   
+    }
+
+}
+	
         static void Main(string[] args)
         {
             while (true)
@@ -37,13 +62,26 @@ namespace ConsolePark
                     Int32.TryParse(Console.ReadLine(), out int userHeight);
                     Console.WriteLine($"You entered:{userGender}, {userName},{dayOfWeek}, {userHeight}");
 
+					AttractionSettings magicNumbers = new AttractionSettings();
                     String minHforBatman= ConfigurationManager.AppSettings["MinimumHeighForBatman"];
 
-                    if (((int) dayOfWeek == 1 || (int) dayOfWeek == 3 || (int) dayOfWeek == 5)&& userGender=="g" && userHeight >= (int)minHforBatman)
+                    if (((int) dayOfWeek == 1 || (int) dayOfWeek == 3 || (int) dayOfWeek == 5)&& userGender=="b" && userHeight >= magicNumbers.MinBoyHeighForBatman)
                     {
                         Console.WriteLine("You are allowed to go to Batman!");
                     }
 
+                    else if (((int) dayOfWeek == 2 || (int) dayOfWeek == 3 || (int) dayOfWeek == 4)
+					&& (userGender=="g" && userHeight >= magicNumbers.MinGirlHeighForSwan&&(userHeight <= magicNumbers.MaxGirlHeighForSwan))
+					&& (userGender=="b" && userHeight <= magicNumbers.MaxBoyHeighForSwan)
+					)
+                    {
+                        Console.WriteLine("You are allowed to go to Swan!");
+                    }
+					
+					else ((int) dayOfWeek != 7 )
+                    {
+                        Console.WriteLine("Go to PONY!");
+                    }
 
                     Console.WriteLine("Good bye!!");
                     Console.ReadLine();
