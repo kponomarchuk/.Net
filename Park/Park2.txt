@@ -55,7 +55,6 @@ static void Main(string[] args)
     {
         if( attract.ToUpper() =="BATMAN" && (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && gender == "b" && height >= AttractionSettings.MinBoyHeighForBatman))
         {
-            //Console.WriteLine(name + " you can go to Batman!");
             return true;
         }
 
@@ -65,13 +64,12 @@ static void Main(string[] args)
             && (gender == "b" && height <= AttractionSettings.MaxBoyHeighForSwan)
         )
         {
-                    // Console.WriteLine(name + " you can  go to Swan!");
-            return true;
+             return true;
                 }
 
         else if (attract.ToUpper() == "PONY" && ((int)dayOfWeek != 7))
         {
-                    //Console.WriteLine(name + " you can go to PONY!");
+                    
             return true;
                 }
 
@@ -80,7 +78,7 @@ static void Main(string[] args)
 
     }
 
-    void printAttractCheckResults(string vUserName, string vAttraction)
+    void PrintAttractCheckResults(string vUserName, string vAttraction)
     {
         Console.WriteLine(vUserName + " you can  go to " + vAttraction +"!");
             }
@@ -107,19 +105,19 @@ static void Main(string[] args)
             string attraction = "BATMAN";
             if (CheckAttractions(userDayOfWeek, userGender, globUserHeight, attraction))
             {
-                printAttractCheckResults(userName, attraction);
+                PrintAttractCheckResults(userName, attraction);
 
             }
             attraction = "SWAN";
             if (CheckAttractions(userDayOfWeek, userGender, globUserHeight, attraction))
             {
-                printAttractCheckResults(userName, attraction);
+                PrintAttractCheckResults(userName, attraction);
 
             }
             attraction = "PONY";
             if (CheckAttractions(userDayOfWeek, userGender, globUserHeight, attraction))
             {
-                printAttractCheckResults(userName, attraction);
+                PrintAttractCheckResults(userName, attraction);
 
             }
 
