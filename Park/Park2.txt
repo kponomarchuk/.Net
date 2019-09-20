@@ -50,42 +50,53 @@ namespace ConsolePark
 
 static void Main(string[] args)
 {
-    //AttractionSettings magicNumbers = new AttractionSettings();
+
+     void CheckAttractions(DayOfWeek dayOfWeek, string userGender, int userHeight, string name,string attract )
+    {
+        if( attract.ToUpper() =="BATMAN" && (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && userGender == "b" && userHeight >= AttractionSettings.MinBoyHeighForBatman))
+        {
+            Console.WriteLine(name + " go to Batman!");
+        }
+
+
+        if (attract.ToUpper() == "SWAN" &&  (((int)dayOfWeek == 2 || (int)dayOfWeek == 3 || (int)dayOfWeek == 4))
+            && (userGender == "g" && userHeight >= AttractionSettings.MinGirlHeighForSwan && (userHeight <= AttractionSettings.MaxGirlHeighForSwan))
+            && (userGender == "b" && userHeight <= AttractionSettings.MaxBoyHeighForSwan)
+        )
+        {
+            Console.WriteLine(name + " go to Swan!");
+                }
+
+        if (attract.ToUpper() == "PONY" && ((int)dayOfWeek != 7))
+        {
+            Console.WriteLine(name +  " go to PONY!");
+        }
+               
+
+     }
+
+
+            //AttractionSettings magicNumbers = new AttractionSettings();
             while (true)
     {//rost den nedeli pol imja
         try
         {
             Console.WriteLine("Enter day of week! 1-Mon,2-Tue,3-Wed,4-Thu,5-Fri,6-Sat,7-Sun");
             Int32.TryParse(Console.ReadLine(), out int intDayOfWeek);
-            DayOfWeek dayOfWeek = (DayOfWeek)intDayOfWeek;
+            DayOfWeek globDayOfWeek = (DayOfWeek)intDayOfWeek;
             Console.WriteLine("Enter your name!");
-            String userName = Console.ReadLine();
+            String globUserName = Console.ReadLine();
             Console.WriteLine("Enter your gender! g - girl/b- boy");
-            String userGender = Console.ReadLine();
+            String globUserGender = Console.ReadLine();
             Console.WriteLine("Enter your height in centimeters!");
-            Int32.TryParse(Console.ReadLine(), out int userHeight);
-            Console.WriteLine($"You entered:{userGender}, {userName},{dayOfWeek}, {userHeight}");
+            Int32.TryParse(Console.ReadLine(), out int globUserHeight);
+            Console.WriteLine($"You entered:{globUserGender}, {globUserName},{globDayOfWeek}, {globUserHeight}");
 
-            
-            //String minHforBatman = ConfigurationManager.AppSettings["MinimumHeighForBatman"];
 
-            if (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && userGender == "b" && userHeight >= AttractionSettings.MinBoyHeighForBatman)
-            {
-                Console.WriteLine("You are allowed to go to Batman!");
-            }
-
-            else if (((int)dayOfWeek == 2 || (int)dayOfWeek == 3 || (int)dayOfWeek == 4)
-            && (userGender == "g" && userHeight >= AttractionSettings.MinGirlHeighForSwan && (userHeight <= AttractionSettings.MaxGirlHeighForSwan))
-            && (userGender == "b" && userHeight <= AttractionSettings.MaxBoyHeighForSwan)
-            )
-            {
-                Console.WriteLine("You are allowed to go to Swan!");
-            }
-
-            else if ((int)dayOfWeek != 7)
-                    {
-                Console.WriteLine("Go to PONY!");
-            }
+                    //String minHforBatman = ConfigurationManager.AppSettings["MinimumHeighForBatman"];
+            CheckAttractions(globDayOfWeek, globUserGender, globUserHeight, globUserName, "BATMAN");
+            CheckAttractions(globDayOfWeek, globUserGender, globUserHeight, globUserName, "SWAN");
+            CheckAttractions(globDayOfWeek, globUserGender, globUserHeight, globUserName,"PONY");
 
             Console.WriteLine("Good bye!!");
             Console.ReadLine();
