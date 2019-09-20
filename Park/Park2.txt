@@ -51,29 +51,39 @@ namespace ConsolePark
 static void Main(string[] args)
 {
 
-     void CheckAttractions(DayOfWeek dayOfWeek, string userGender, int userHeight, string name,string attract )
+     bool CheckAttractions(DayOfWeek dayOfWeek, string gender, int height,string attract )
     {
-        if( attract.ToUpper() =="BATMAN" && (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && userGender == "b" && userHeight >= AttractionSettings.MinBoyHeighForBatman))
+        if( attract.ToUpper() =="BATMAN" && (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && gender == "b" && height >= AttractionSettings.MinBoyHeighForBatman))
         {
-            Console.WriteLine(name + " go to Batman!");
+            //Console.WriteLine(name + " you can go to Batman!");
+            return true;
         }
 
 
-        if (attract.ToUpper() == "SWAN" &&  (((int)dayOfWeek == 2 || (int)dayOfWeek == 3 || (int)dayOfWeek == 4))
-            && (userGender == "g" && userHeight >= AttractionSettings.MinGirlHeighForSwan && (userHeight <= AttractionSettings.MaxGirlHeighForSwan))
-            && (userGender == "b" && userHeight <= AttractionSettings.MaxBoyHeighForSwan)
+        else if  (attract.ToUpper() == "SWAN" &&  (((int)dayOfWeek == 2 || (int)dayOfWeek == 3 || (int)dayOfWeek == 4))
+            && (gender == "g" && height >= AttractionSettings.MinGirlHeighForSwan && (height <= AttractionSettings.MaxGirlHeighForSwan))
+            && (gender == "b" && height <= AttractionSettings.MaxBoyHeighForSwan)
         )
         {
-            Console.WriteLine(name + " go to Swan!");
+                    // Console.WriteLine(name + " you can  go to Swan!");
+            return true;
                 }
 
-        if (attract.ToUpper() == "PONY" && ((int)dayOfWeek != 7))
+        else if (attract.ToUpper() == "PONY" && ((int)dayOfWeek != 7))
         {
-            Console.WriteLine(name +  " go to PONY!");
-        }
-               
+                    //Console.WriteLine(name + " you can go to PONY!");
+            return true;
+                }
 
-     }
+        return false;
+
+
+    }
+
+    void printAttractCheckResults(string vUserName, string vAttraction)
+    {
+        Console.WriteLine(vUserName + " you can  go to " + vAttraction +"!");
+            }
 
 
             //AttractionSettings magicNumbers = new AttractionSettings();
@@ -83,20 +93,35 @@ static void Main(string[] args)
         {
             Console.WriteLine("Enter day of week! 1-Mon,2-Tue,3-Wed,4-Thu,5-Fri,6-Sat,7-Sun");
             Int32.TryParse(Console.ReadLine(), out int intDayOfWeek);
-            DayOfWeek globDayOfWeek = (DayOfWeek)intDayOfWeek;
+            DayOfWeek userDayOfWeek = (DayOfWeek)intDayOfWeek;
             Console.WriteLine("Enter your name!");
-            String globUserName = Console.ReadLine();
+            String userName = Console.ReadLine();
             Console.WriteLine("Enter your gender! g - girl/b- boy");
-            String globUserGender = Console.ReadLine();
+            String userGender = Console.ReadLine();
             Console.WriteLine("Enter your height in centimeters!");
             Int32.TryParse(Console.ReadLine(), out int globUserHeight);
-            Console.WriteLine($"You entered:{globUserGender}, {globUserName},{globDayOfWeek}, {globUserHeight}");
+            Console.WriteLine($"You entered gender: {userGender}, name: {userName}, day of week: {userDayOfWeek}, height: {globUserHeight}");
 
 
                     //String minHforBatman = ConfigurationManager.AppSettings["MinimumHeighForBatman"];
-            CheckAttractions(globDayOfWeek, globUserGender, globUserHeight, globUserName, "BATMAN");
-            CheckAttractions(globDayOfWeek, globUserGender, globUserHeight, globUserName, "SWAN");
-            CheckAttractions(globDayOfWeek, globUserGender, globUserHeight, globUserName,"PONY");
+            string attraction = "BATMAN";
+            if (CheckAttractions(userDayOfWeek, userGender, globUserHeight, attraction))
+            {
+                printAttractCheckResults(userName, attraction);
+
+            }
+            attraction = "SWAN";
+            if (CheckAttractions(userDayOfWeek, userGender, globUserHeight, attraction))
+            {
+                printAttractCheckResults(userName, attraction);
+
+            }
+            attraction = "PONY";
+            if (CheckAttractions(userDayOfWeek, userGender, globUserHeight, attraction))
+            {
+                printAttractCheckResults(userName, attraction);
+
+            }
 
             Console.WriteLine("Good bye!!");
             Console.ReadLine();
