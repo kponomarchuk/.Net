@@ -1,0 +1,72 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AnimalLibrary
+{
+    public abstract class Mammal
+    {
+        public abstract void MakeSound();
+    }
+
+    public class Lion : Mammal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("I am Lion and I make: <<Roar!!!>>");
+        }
+    }
+    public class Horse : Mammal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("I am Horse and I make: <<IGOGO!!!>>");
+        }
+    }
+
+
+    public abstract class Fish
+    {
+        public abstract void Eat();
+    }
+
+    public class Shark : Fish
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am Shark and I eat HUMAN");
+        }
+    }
+    public class GoldFish : Fish
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am GoldFish and I eat warms");
+        }
+    }
+
+    public abstract class Reptile
+    {
+        public abstract void Eat();
+    }
+
+    public class Crocodile : Reptile
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am Crocodile and I eat HUMAN");
+        }
+    }
+    public class Frog : Reptile
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am Frog and I eat flies");
+        }
+    }
+
+}
+
+
