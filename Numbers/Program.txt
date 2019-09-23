@@ -1,0 +1,56 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            String user_str;
+            int user_num;
+            int cnt_positive=0;
+            int cnt_negative=0;
+            int cnt_total=0;
+            int sum_all=0;
+            //float avg_amt;
+            while (1==1)
+            {
+                Console.WriteLine("Enter your number! Enter 0 to exit");
+                user_str = Console.ReadLine();
+                
+                try
+                {
+                    Int32.TryParse(user_str, out user_num);
+                    Console.WriteLine(user_num);
+                    
+                    if (user_num == 0)
+                    {
+                        var avg_amt = sum_all / cnt_total;
+                        Console.WriteLine("Posit "+cnt_positive + " Negat "+ cnt_negative +" Avg "+ avg_amt +" Sum "+ sum_all+ " Cnt total "+ cnt_total);
+                        Console.WriteLine("you will exit now. Bye");
+                        break;
+                    }
+                    else if (user_num > 0)
+                    { cnt_positive ++;
+                        cnt_total ++;
+                        sum_all += user_num;
+                        continue;
+                    }
+                    else if (user_num < 0)
+                    { cnt_negative ++;
+                        cnt_total ++;
+                        sum_all += user_num;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine($"Unable to parse '{user_str}'");
+                    continue;
+                }
+                //Console.WriteLine($"You have entered {user_num}");
+                
+
+            }
+        }
+    }
+}
