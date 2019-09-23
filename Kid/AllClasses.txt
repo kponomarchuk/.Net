@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Configuration;
+
+namespace ConsoleCryKid
+{
 
     public static class AttractionSettings
     {
@@ -11,10 +20,10 @@
 
         static AttractionSettings() // static constructor
         {
-             Int32.TryParse(ConfigurationManager.AppSettings["MinBoyHeighForBatman"],out MinBoyHeighForBatman);
-             Int32.TryParse(ConfigurationManager.AppSettings["MinGirlHeighForSwan"],out MinGirlHeighForSwan);
-             Int32.TryParse(ConfigurationManager.AppSettings["MaxGirlHeighForSwan"],out MaxGirlHeighForSwan);
-             Int32.TryParse(ConfigurationManager.AppSettings["MaxBoyHeighForSwan"],out MaxBoyHeighForSwan);
+            Int32.TryParse(ConfigurationManager.AppSettings["MinBoyHeighForBatman"], out MinBoyHeighForBatman);
+            Int32.TryParse(ConfigurationManager.AppSettings["MinGirlHeighForSwan"], out MinGirlHeighForSwan);
+            Int32.TryParse(ConfigurationManager.AppSettings["MaxGirlHeighForSwan"], out MaxGirlHeighForSwan);
+            Int32.TryParse(ConfigurationManager.AppSettings["MaxBoyHeighForSwan"], out MaxBoyHeighForSwan);
             //MinBoyHeighForBatman = 150;
             //MinGirlHeighForSwan = 120;
             //MaxGirlHeighForSwan = 140;
@@ -34,150 +43,150 @@
         Sunday = 7
     }
 //----------------------------
-using System;
-
-using System.Configuration;
-
 public class AttractionManager
-{
-private int cash;
-private bool openStatus;
-private int rideCost;
+    {
+        private int _cash;
+        private bool _openStatus;
+        private readonly int _rideCost;
 
-AttractionManager{
-cash=0;
-openStatus=true;
-rideCost=10;
+        public AttractionManager() {
+_cash=0;
+_openStatus=true;
+_rideCost=10;
 }
 
-public int getRideCost(){
-return rideCost;}
+    public int GetRideCost()
+    {
+        return _rideCost;
+    }
 
-public bool getOpenStatus{
-return this.openStatus;}
+    public bool GetOpenStatus()
+    {
+        return this._openStatus;
+    }
 
-public void AddMoneyToCash(int vCash){
-this.cash+=vCash;
-if (this.cash>=200)
-{this.openStatus=false;}
-}
+    public void AddMoneyToCash(int vCash)
+    {
+        this._cash += vCash;
+        if (this._cash >= 200)
+        { this._openStatus = false; }
+    }
 
 
-public bool CheckKid()//temporary for testing only
-	{ return true; 
-	}
+    public bool CheckKid()//temporary for testing only
+    {
+        return true;
+    }
 
-public bool CheckKid(DayOfWeek dayOfWeek, string gender, int height,string attract )
-	{
-	    
-        if( attract.ToUpper() =="BATMAN" && (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && gender == "b" && height >= AttractionSettings.MinBoyHeighForBatman))
+    public bool CheckKid(DayOfWeek dayOfWeek, string gender, int height, string attract)
+    {
+
+        if (attract.ToUpper() == "BATMAN" && (((int)dayOfWeek == 1 || (int)dayOfWeek == 3 || (int)dayOfWeek == 5) && gender == "b" && height >= AttractionSettings.MinBoyHeighForBatman))
         {
             return true;
         }
 
 
-        else if  (attract.ToUpper() == "SWAN" &&  (((int)dayOfWeek == 2 || (int)dayOfWeek == 3 || (int)dayOfWeek == 4))
+        else if (attract.ToUpper() == "SWAN" && (((int)dayOfWeek == 2 || (int)dayOfWeek == 3 || (int)dayOfWeek == 4))
             && (gender == "g" && height >= AttractionSettings.MinGirlHeighForSwan && (height <= AttractionSettings.MaxGirlHeighForSwan))
             && (gender == "b" && height <= AttractionSettings.MaxBoyHeighForSwan)
         )
         {
-             return true;
-                }
+            return true;
+        }
 
         else if (attract.ToUpper() == "PONY" && ((int)dayOfWeek != 7))
         {
-                    
+
             return true;
-                }
+        }
 
         return false;
 
 
-    
 
-		
+
+
     }
 
 }
 //----------------------------
-using System;
+
 
 public class Kid
 {
-    private int height;
-    private string name;
-    private int happinessLevel;
-    private int money;
+    private int _height;
+    private string _name;
+    private int _happinessLevel;
+    private int _money;
 
-	Kid()
-	{
-	Kid("Random",0,100)
-	//this.name="Random";
-	//this.height=100;
-	//this.money=10;
-	} 
-	
-	Kid(string vName, int vHeight, int vMoney)
-	{
-	this.name=vName;
-	this.height=vHeight;
-	this.money=vMoney;
-	}
-	public void Cry()
-	{
-	    //this.happinessLevel-=10;
-		this.height+=2;
-		Console.WriteLine(name+" is crying :`((  and growing o__O? !!! Current height is  "+this.height);
-		
+    Kid()
+    {
+        //Kid("Random", 0, 100);
+        this._name="Random";
+        this._height=110;
+        this._money=100;
     }
-    public int getMoney()
-	{return this.money;
-	}
-	
+
+    Kid(string vName, int vHeight, int vMoney)
+    {
+        this._name = vName;
+        this._height = vHeight;
+        this._money = vMoney;
+    }
+    public void Cry()
+    {
+        //this.happinessLevel-=10;
+        this._height += 2;
+        Console.WriteLine(this._name + " is crying :`((  and growing o__O? !!! Current height is  " + this._height);
+
+    }
+    public int GetMoney()
+    {
+        return this._money;
+    }
+
     public void Ride(int attractCost)
     {
-        
-		if (money>=attractCost)
-		{this.money-=attractCost;
-		this.happinessLevel+=10;
-		Console.WriteLine(name + " is riding attraction!!! :`(( ");}
-		else {Console.WriteLine("Not enough money. Kid has "+money". Attraction cost is "+ attractCost}
-		
+
+        if (_money >= attractCost)
+        {
+            this._money -= attractCost;
+            this._happinessLevel += 10;
+            Console.WriteLine(_name + " is riding attraction!!! :`(( ");
+        }
+        else
+        {
+            Console.WriteLine("Not enough money. Kid has " + _money + ". Attraction cost is " + attractCost);
+
+        }
     }
 
 }
-//----------------------------
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConsoleCryKid
-{
-    class Program
+class Program
     {
         static void Main(string[] args)
         {
-		AttractionManager manager = new AttractionMannager();
-		Kid randomKid = new Kid();
-		Kid randomKid2 = new Kid();
-		Kid randomKid3 = new Kid();
-		while (manager.getstatusOpen())
-		{if(manager.CheckKid()&&randomKid.getMoney()>0)
-		{
-		randomKid.Ride(manager.getRideCost());
-		manager.AddMoneyToCash(manager.getRideCost());
-		}
-		else
-		{randomKid.Cry();}
-		
-		}
-		    Console.WriteLine("Good bye!!");
-            Console.ReadLine();
-            
+            AttractionManager manager = new AttractionMannager();
+            Kid randomKid = new Kid();
+            Kid randomKid2 = new Kid();
+            Kid randomKid3 = new Kid();
+            while (manager.getstatusOpen())
+            {
+                if (manager.CheckKid() && randomKid.getMoney() > 0)
+                {
+                    randomKid.Ride(manager.getRideCost());
+                    manager.AddMoneyToCash(manager.getRideCost());
+                }
+                else
+                { randomKid.Cry(); }
 
-//Console.WriteLine("Initial parameters: "+randonKid.name+" has "+randomKid.money+" and height is "+random.kid);
+            }
+            Console.WriteLine("Good bye!!");
+            Console.ReadLine();
+
+
+            //Console.WriteLine("Initial parameters: "+randonKid.name+" has "+randomKid.money+" and height is "+random.kid);
         }
     }
 }
