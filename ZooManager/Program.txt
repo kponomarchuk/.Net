@@ -1,0 +1,23 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using AnimalLibrary;
+
+namespace ZooManager
+{
+    class Program
+    {
+        
+       
+    public static void Main(string[] args)
+    {
+    AnimalLibrary.Mammal lion = new AnimalLibrary.Lion();
+        lion.MakeSound();
+        Console.ReadLine();
+
+    
+       }
+    }
+}
