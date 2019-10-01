@@ -1,0 +1,123 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AnimalLibrary
+{
+
+    interface IPredator
+    {
+        void Hunt(string victim);
+    }
+    interface IWaterLover
+    {
+        void Swim(string place);
+        int SpeedKmH { get; set; }
+        
+
+    }
+    public abstract class Mammal
+    {
+        public abstract void MakeSound();
+    }
+
+    public class Lion : Mammal,IPredator
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("I am Lion and I make: <<Roar!!!>>");
+        }
+
+        public void Hunt(string victim)
+        {
+            Console.WriteLine("I am Lion and I like to chase" +victim);
+            //throw new NotImplementedException();
+        }
+    }
+    public class Horse : Mammal
+    {
+        public override void MakeSound()
+        {
+            Console.WriteLine("I am Horse and I make: <<IGOGO!!!>>");
+        }
+    }
+
+
+    public abstract class Fish
+    {
+        public abstract void Eat();
+    }
+
+    public class Shark : Fish, IPredator, IWaterLover
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am Shark and I eat HUMAN");
+        }
+
+        public void Hunt(string victim)
+        {
+            Console.WriteLine("I am Shark and I like to eat" + victim+ "in the water");
+            //throw new NotImplementedException();
+        }
+
+        public void Swim(string place)
+        {
+            Console.WriteLine("I am Shark and I like to swim in the " + place);
+        }
+
+        public int SpeedKmH { get; set; }
+    }
+    public class GoldFish : Fish, IWaterLover
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am GoldFish and I eat warms");
+        }
+
+
+        public void Swim(string place)
+        {
+            Console.WriteLine("I am fish and I like to swim in the " + place);
+        }
+
+        public int SpeedKmH { get; set; }
+    }
+
+    public abstract class Reptile : IWaterLover
+    {
+        public abstract void Eat();
+        public void Swim(string place)
+        {
+            Console.WriteLine("I am reptile and can swim in the " + place);
+        }
+
+        public int SpeedKmH { get; set; }
+    }
+
+    public class Crocodile : Reptile, IPredator
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am Crocodile and I eat HUMAN");
+        }
+
+        public void Hunt(string victim)
+        {
+            Console.WriteLine("I am Crocodile and I like to eat" + victim + "in the water or on the ground");
+            //throw new NotImplementedException();
+        }
+    }
+    public class Frog : Reptile
+    {
+        public override void Eat()
+        {
+            Console.WriteLine("I am Frog and I eat flies");
+        }
+    }
+
+}
+
+
