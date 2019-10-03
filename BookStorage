@@ -1,0 +1,146 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace BookStorage
+
+{
+
+    class Program
+
+    {
+
+        public class Book
+
+ 
+
+        {
+
+            public string Title { get; set; }
+
+            public Book(string vTitle)
+
+            {
+
+                Title = vTitle;
+
+            }
+
+ 
+
+        }
+
+ 
+
+        public class BookStorage
+
+ 
+
+        {
+
+ 
+
+            public delegate void BookProcessing(string title);
+
+            private List<Book> _bookShelf = new List<Book>();
+
+            public void AddBook(string title, BookProcessing updateManager)
+
+            {
+
+                _bookShelf.Add(new Book(title));
+
+                updateManager(title);
+
+ 
+
+            }
+
+ 
+
+            public void PrintAllBooks(BookProcessing updateManager)
+
+            {
+
+            foreach (var book in _bookShelf)
+
+                {
+
+                    updateManager(book.Title);
+
+                }
+
+            }
+
+ 
+
+        }
+
+ 
+
+        public class BookManager
+
+ 
+
+        {
+
+ 
+
+                private int NumOfBooks { get; set; }
+
+                public void countBook(string title)
+
+                {
+
+                    ++NumOfBooks;
+
+                    Console.WriteLine("This book was added " + title);
+
+ 
+
+ 
+
+ 
+
+                }
+
+ 
+
+        }
+
+            static void Main(string[] args)
+
+            {
+
+                BookManager bookManager = new BookManager();
+
+                BookStorage bookStorage = new BookStorage();
+
+                bookStorage.AddBook("BigBook", bookManager.countBook);
+
+                bookStorage.AddBook("LittleBook", bookManager.countBook);
+
+                bookStorage.PrintAllBooks((bookTitle)=>Console.WriteLine("Book with title "+bookTitle +" was added to storage"));
+
+                Console.ReadLine();
+
+ 
+
+ 
+
+            }
+
+        }
+
+   
+
+}
+
