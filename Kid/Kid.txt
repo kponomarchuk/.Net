@@ -1,0 +1,24 @@
+using System;
+
+public class Kid
+{
+    private int height;
+    private string name;
+    private int happinessLevel;
+    int money;
+
+	public Cry()
+	{
+	    Console.WriteLine(name+" is crying!!! :`(( ");
+    }
+
+    public Ride()
+    {
+        Console.WriteLine(name + " is riding attraction!!! :`(( ");
+    }
+
+    public ()
+    {
+        Console.WriteLine(name + " is riding attraction!!! :`(( ");
+    }
+}
